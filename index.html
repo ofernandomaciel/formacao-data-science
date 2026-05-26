@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataPath — Formação em Ciência de Dados</title>
+  <meta name="description" content="Trilha completa de formação em Ciência de Dados em português do Brasil — do SQL básico ao Deep Learning, gratuita e open source." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & TOKENS ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg:       #09090f;
+      --bg2:      #111120;
+      --bg3:      #1a1a2e;
+      --border:   #2a2a45;
+      --border2:  #3d3d60;
+
+      --text:     #f0f0fa;
+      --text2:    #9898b8;
+      --text3:    #5a5a80;
+
+      --violet:   #7c6fff;
+      --pink:     #ff6b9d;
+      --cyan:     #38d9ff;
+      --green:    #3ddc97;
+      --orange:   #ff9f43;
+      --yellow:   #ffd166;
+
+      --gv: rgba(124,111,255,0.12);
+      --gp: rgba(255,107,157,0.10);
+      --gc: rgba(56,217,255,0.10);
+      --gg: rgba(61,220,151,0.10);
+
+      --r: 14px;
+      --r2: 8px;
+      --shadow: 0 4px 32px rgba(0,0,0,0.5);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(9,9,15,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(1rem, 5vw, 3rem);
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text);
+    }
+
+    .nav-logo-icon {
+      width: 30px; height: 30px;
+      background: linear-gradient(135deg, var(--violet), var(--cyan));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+
+    .nav-links {
+      display: flex; gap: 8px; align-items: center; list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      font-family: 'DM Mono', monospace;
+      color: var(--text2);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--r2);
+      transition: all 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--text); background: var(--bg3); }
+
+    .nav-cta {
+      background: var(--violet) !important;
+      color: #fff !important;
+      font-weight: 500 !important;
+    }
+
+    .nav-cta:hover { background: #6058e5 !important; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      padding: clamp(4rem, 10vw, 8rem) clamp(1rem, 5vw, 3rem) clamp(3rem, 8vw, 6rem);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 30%, rgba(124,111,255,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 70%, rgba(56,217,255,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 35% at 60% 10%, rgba(255,107,157,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gv);
+      border: 1px solid rgba(124,111,255,0.35);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--violet);
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
+    }
+
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      max-width: 800px;
+      margin-left: auto; margin-right: auto;
+    }
+
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--violet) 0%, var(--cyan) 50%, var(--green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--text2);
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--violet), #5a52d0);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: var(--r);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(124,111,255,0.35);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,111,255,0.45); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border2);
+      padding: 14px 28px;
+      border-radius: var(--r);
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover { background: var(--bg3); border-color: var(--violet); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      margin: 0 clamp(1rem, 5vw, 3rem);
+      padding: 32px 40px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      display: flex; flex-wrap: wrap; gap: 32px;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .stat-num.v { color: var(--violet); }
+    .stat-num.c { color: var(--cyan); }
+    .stat-num.g { color: var(--green); }
+    .stat-num.o { color: var(--orange); }
+    .stat-num.p { color: var(--pink); }
+
+    /* ── SECTION ── */
+    section { padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 3rem); }
+
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    .section-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--violet);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .section-sub {
+      margin-top: 12px;
+      color: var(--text2);
+      font-size: 1rem;
+      max-width: 560px;
+    }
+
+    /* ── MODULES GRID ── */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .module-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 24px;
+      transition: all 0.2s;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .module-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: var(--r) var(--r) 0 0;
+    }
+
+    .module-card:hover {
+      border-color: var(--border2);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .module-card:nth-child(1)::before { background: var(--violet); }
+    .module-card:nth-child(2)::before { background: var(--cyan); }
+    .module-card:nth-child(3)::before { background: var(--green); }
+    .module-card:nth-child(4)::before { background: var(--orange); }
+    .module-card:nth-child(5)::before { background: var(--pink); }
+    .module-card:nth-child(6)::before { background: var(--yellow); }
+    .module-card:nth-child(7)::before { background: var(--violet); }
+    .module-card:nth-child(8)::before { background: var(--cyan); }
+    .module-card:nth-child(9)::before { background: var(--green); }
+    .module-card:nth-child(10)::before { background: var(--orange); }
+
+    .module-header {
+      display: flex; align-items: flex-start; gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .module-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .module-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text3);
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .module-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
+    .module-weeks {
+      font-size: 0.78rem;
+      color: var(--text2);
+      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .weeks-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--text3);
+    }
+
+    .module-topics {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+
+    .module-topics li {
+      font-size: 0.82rem;
+      color: var(--text2);
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .module-topics li::before {
+      content: '→';
+      color: var(--text3);
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+
+    .module-badge {
+      display: inline-flex;
+      margin-top: 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      padding: 3px 8px;
+      border-radius: 100px;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-done { background: rgba(61,220,151,0.12); color: var(--green); border: 1px solid rgba(61,220,151,0.3); }
+    .badge-wip  { background: rgba(255,159,67,0.12);  color: var(--orange); border: 1px solid rgba(255,159,67,0.3); }
+
+    /* ── ABOUT / FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 28px 24px;
+      transition: border-color 0.2s;
+    }
+
+    .feature-card:hover { border-color: var(--border2); }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .feature-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .feature-desc {
+      font-size: 0.88rem;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    /* ── PORTFOLIO TABLE ── */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+    }
+
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 22px;
+      display: flex; gap: 16px; align-items: flex-start;
+      transition: all 0.2s;
+    }
+
+    .project-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+
+    .project-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--text2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .project-info {}
+
+    .project-module {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--text3);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .project-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 700px;
+    }
+
+    .timeline-item {
+      display: flex; gap: 24px;
+      padding-bottom: 32px;
+      position: relative;
+    }
+
+    .timeline-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 19px; top: 40px; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-dot {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+
+    .timeline-body {}
+
+    .timeline-version {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text3);
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .timeline-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .timeline-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 5px;
+    }
+
+    .timeline-list li {
+      font-size: 0.85rem;
+      color: var(--text2);
+      display: flex; align-items: flex-start; gap: 8px;
+      line-height: 1.5;
+    }
+
+    .timeline-list li::before {
+      content: '+';
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .timeline-list li.planned::before { content: '◦'; color: var(--text3); }
+
+    /* ── CONTRIBUTE ── */
+    .contribute-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .contribute-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 22px 20px;
+      display: flex; gap: 14px; align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+
+    .contribute-item:hover { border-color: var(--border2); }
+
+    .contribute-emoji { font-size: 1.4rem; flex-shrink: 0; }
+
+    .contribute-text .ct-title {
+      font-weight: 600; font-size: 0.9rem; margin-bottom: 4px;
+    }
+
+    .contribute-text .ct-desc {
+      font-size: 0.82rem; color: var(--text2); line-height: 1.5;
+    }
+
+    /* ── DOCS LINKS ── */
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .doc-link {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 20px;
+      text-decoration: none;
+      color: var(--text);
+      display: flex; flex-direction: column; gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .doc-link:hover { border-color: var(--violet); background: var(--bg3); transform: translateY(-2px); }
+
+    .doc-link-icon { font-size: 1.6rem; }
+
+    .doc-link-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .doc-link-desc {
+      font-size: 0.78rem;
+      color: var(--text3);
+      line-height: 1.5;
+    }
+
+    /* ── LICENSE BADGES ── */
+    .license-row {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      margin-top: 32px;
+    }
+
+    .license-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--r2);
+      padding: 8px 16px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text2);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .license-badge:hover { border-color: var(--violet); color: var(--text); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px clamp(1rem, 5vw, 3rem);
+      display: flex; flex-wrap: wrap; gap: 16px;
+      justify-content: space-between; align-items: center;
+    }
+
+    .footer-left {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .footer-icon {
+      width: 26px; height: 26px;
+      background: linear-gradient(135deg, var(--violet), var(--cyan));
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+    }
+
+    .footer-right {
+      font-size: 0.82rem;
+      color: var(--text3);
+    }
+
+    .footer-right a { color: var(--text2); text-decoration: none; }
+    .footer-right a:hover { color: var(--violet); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0 clamp(1rem, 5vw, 3rem);
+    }
+
+    /* ── UTILS ── */
+    .tag {
+      display: inline-flex;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.5px;
+    }
+
+    .tag-violet { background: var(--gv); color: var(--violet); border: 1px solid rgba(124,111,255,0.25); }
+    .tag-cyan   { background: var(--gc); color: var(--cyan);   border: 1px solid rgba(56,217,255,0.25); }
+    .tag-green  { background: var(--gg); color: var(--green);  border: 1px solid rgba(61,220,151,0.25); }
+    .tag-pink   { background: var(--gp); color: var(--pink);   border: 1px solid rgba(255,107,157,0.25); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .stats-bar { padding: 24px; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-icon">📊</span>
+    DataPath
+  </a>
+  <ul class="nav-links">
+    <li><a href="#modulos">Módulos</a></li>
+    <li><a href="#portfolio">Portfólio</a></li>
+    <li><a href="#contribuir">Contribuir</a></li>
+    <li><a href="plataforma/curso_data_science.html" class="nav-cta">Acessar Plataforma →</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    Curso aberto · Em desenvolvimento ativo · PT-BR
+  </div>
+  <h1>
+    Formação completa em<br />
+    <span class="gradient-text">Ciência de Dados</span>
+  </h1>
+  <p class="hero-sub">
+    Do SQL básico ao Deep Learning — trilha de 40 semanas em português do Brasil,
+    com exercícios práticos, projetos de portfólio reais e curadoria de recursos.
+    Gratuito e open source.
+  </p>
+  <div class="hero-actions">
+    <a href="plataforma/curso_data_science.html" class="btn-primary">
+      🚀 Acessar a Plataforma
+    </a>
+    <a href="https://github.com/ofernandomaciel/formacao-data-science" class="btn-secondary">
+      ★ Ver no GitHub
+    </a>
+  </div>
+</header>
+
+<!-- ── STATS ── -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num v">40</div>
+    <div class="stat-label">Semanas</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num c">10</div>
+    <div class="stat-label">Módulos</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num g">10+</div>
+    <div class="stat-label">Projetos de Portfólio</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num o">2h</div>
+    <div class="stat-label">Por dia</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num p">100%</div>
+    <div class="stat-label">Gratuito</div>
+  </div>
+</div>
+
+<div class="divider" style="margin-top: 0; margin-bottom: 0;"></div>
+
+<!-- ── PARA QUEM É ── -->
+<section id="sobre">
+  <div class="section-header">
+    <div class="section-eyebrow">Para quem é este curso</div>
+    <h2 class="section-title">Do zero ao mercado,<br />em português</h2>
+    <p class="section-sub">Sem pré-requisitos técnicos para começar. Conteúdo pensado para a realidade brasileira.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🌱</div>
+      <div class="feature-title">Iniciantes absolutos</div>
+      <div class="feature-desc">O Semestre 1 começa do zero — sem assumir nenhum conhecimento de programação ou matemática prévia.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔄</div>
+      <div class="feature-title">Transição de carreira</div>
+      <div class="feature-desc">Profissionais de outras áreas que querem migrar para dados com uma trilha clara e estruturada.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🗺️</div>
+      <div class="feature-title">Autodidatas sem roteiro</div>
+      <div class="feature-desc">Para quem estuda sozinho mas sente falta de estrutura, exercícios progressivos e projetos reais.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🇧🇷</div>
+      <div class="feature-title">Foco no Brasil</div>
+      <div class="feature-desc">Dados brasileiros, exemplos de empresas reais do país e referências prioritariamente em PT-BR.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📦</div>
+      <div class="feature-title">Conteúdo rico por semana</div>
+      <div class="feature-desc">Cada semana traz: resumo didático, vídeos curados, repositórios, livros, datasets e exercícios em 3 níveis.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💼</div>
+      <div class="feature-title">Portfólio desde o início</div>
+      <div class="feature-desc">Os projetos são pensados para ir direto ao GitHub — ao final você tem 10+ projetos prontos para mostrar ao mercado.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── MÓDULOS ── -->
+<section id="modulos">
+  <div class="section-header">
+    <div class="section-eyebrow">Currículo completo</div>
+    <h2 class="section-title">10 módulos · 2 semestres</h2>
+    <p class="section-sub">Uma trilha progressiva que leva do fundamento ao estado da arte em Ciência de Dados.</p>
+  </div>
+
+  <div class="modules-grid">
+
+    <!-- M01 -->
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-icon" style="background:rgba(124,111,255,0.12);">🧭</div>
+        <div>
+          <div class="module-num">MÓDULO 01 · SEMESTRE 1</div>
+          <div class="module-name">Fundamentos de Ciência de Dados</div>
+        </div>
+      </div>
+      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 1–2 · 2 semanas</div>
+      <ul class="module-topics">
+        <li>O que é Ciência de Dados e o mercado BR</li>
+        <li>Carreiras, salários e áreas de atuação</li>
+        <li>Ética, viés e responsabilidade</li>
+        <li>Ferramentas e ambiente de trabalho</li>
+      </ul>
+      <span class="module-badge badge-done">✓ Conteúdo completo</span>
+    </div>
+
+    <!-- M02 -->
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-icon" style="background:rgba(56,217,255,0.12);">🗄️</div>
+        <div>
+          <div class="module-num">MÓDULO 02 · SEMESTRE 1</div>
+          <div class="module-name">SQL — Fundamentos</div>
+        </div>
+      </div>
+      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 3–7 · 5 semanas</div>
+      <ul class="module-topics">
+        <li>Bancos relacionais e modelagem</li>
+        <li>SELECT, WHERE, ORDER BY</li>
+        <li>Funções de agregação e filtros</li>
+        <li>GROUP BY e JOINs</li>
+      </ul>
+      <span class="module-badge badge-wip">⟳ Em produção</span>
+    </div>
+
+    <!-- M03 -->
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-icon" style="background:rgba(61,220,151,0.12);">⚡</div>
+        <div>
+          <div class="module-num">MÓDULO 03 · SEMESTRE 1</div>
+          <div class="module-name">SQL Avançado + Python</div>
+        </div>
+      </div>
+      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 8–10 · 3 semanas</div>
+      <ul class="module-topics">
+        <li>Subqueries e CTEs</li>
+        <li>Window Functions</li>
+        <li>Python + SQL (SQLite, pandas)</li>
+      </ul>
+      <span class="module-badge badge-wip">⟳ Em produção</span>
+    </div>
+
+    <!-- M04 -->
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-icon" style="background:rgba(255,159,67,0.12);">🐍</div>
+        <div>
+          <div class="module-num">MÓDULO 04 · SEMESTRE 1</div>
+          <div class="module-name">Python para Ciência de Dados</div>
+        </div>
+      </div>
+      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 11–14 · 4 semanas</div>
+      <ul class="module-topics">
+        <li>Python básico e estruturas de dados</li>
+        <li>NumPy — vetores e matrizes</li>
+        <li>Pandas — manipulação de dados</li>
+      </ul>
+      <span class="module-badge badge-wip">⟳ Em produção</span>
+    </div>
+
+    <!-- M05 -->
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-icon" style="background:rgba(255,107,157,0.12);">📊</div>
+        <div>
+          <div class="module-num">MÓDULO 05 · SEMESTRE 1</div>
+          <div class="module-name">EDA e Visualização</div>
+        </div>
+      </div>
+      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 15–19 · 5 semanas</div>
+      <ul class="module-topics">
+        <li>Limpeza e tratamento de dados</li>
+        <li>Estatística descritiva</li>
+        <li>Matplotlib, Seaborn, Plotly</li>
+        <li>Dashboards com Streamlit</li>
+      </ul>
+      <span class="module-badge badge-wip">⟳ Em produção</span>
+    </div>
+
+    <!-- M06 -->
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-icon" style="background:rgba(255,209,102,0.12);">📐</div>
+        <div>
+          <div class="module-num">MÓDULO 06 · SEMESTRE 1</div>
+          <div class="module-name">Estatística e Probabilidade</div>
+        </div>
+      </div>
+      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 20–22 · 3 semanas</div>
+      <ul class="module-topics">
+        <li>Probabilidade e distribuições</li>
+        <li>Testes de hipótese e A/B test</li>
+        <li>Álgebra linear aplicada</li>
+      </ul>
+      <span class="module-badge badge-wip">⟳ Em produção</span>
+    </div>
+
+    <!-- M07 -->
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-icon" style="background:rgba(124,111,255,0.12);">🤖</div>
+        <div>
+          <div class="module-num">MÓDULO 07 · SEMESTRE 2</div>
+          <div class="module-name">Machine Learning Básico</div>
+        </div>
+      </div>
+      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 23–28 · 6 semanas</div>
+      <ul class="module-topics">
+        <li>Introdução ao ML e scikit-learn</li>
+        <li>Regressão Linear e Logística</li>
+        <li>Árvores, Random Forest, XGBoost</li>
+        <li>Clusterização e PCA</li>
+      </ul>
+      <span class="module-badge badge-wip">⟳ Em produção</span>
+    </div>
+
+    <!-- M08 -->
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-icon" style="background:rgba(56,217,255,0.12);">🧠</div>
+        <div>
+          <div class="module-num">MÓDULO 08 · SEMESTRE 2</div>
+          <div class="module-name">ML Avançado e Deep Learning</div>
+        </div>
+      </div>
+      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 29–33 · 5 semanas</div>
+      <ul class="module-topics">
+        <li>Redes neurais e backpropagation</li>
+        <li>CNN e Transfer Learning</li>
+        <li>NLP e séries temporais</li>
+        <li>Interpretabilidade (SHAP, LIME)</li>
+      </ul>
+      <span class="module-badge badge-wip">⟳ Em produção</span>
+    </div>
+
+    <!-- M09 -->
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-icon" style="background:rgba(61,220,151,0.12);">☁️</div>
+        <div>
+          <div class="module-num">MÓDULO 09 · SEMESTRE 2</div>
+          <div class="module-name">Big Data, Cloud e Engenharia</div>
+        </div>
+      </div>
+      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 34–37 · 4 semanas</div>
+      <ul class="module-topics">
+        <li>PySpark e processamento distribuído</li>
+        <li>AWS / GCP / Azure para dados</li>
+        <li>Pipelines ETL e Airflow</li>
+        <li>Data Modeling e dbt</li>
+      </ul>
+      <span class="module-badge badge-wip">⟳ Em produção</span>
+    </div>
+
+    <!-- M10 -->
+    <div class="module-card">
+      <div class="module-header">
+        <div class="module-icon" style="background:rgba(255,159,67,0.12);">🏆</div>
+        <div>
+          <div class="module-num">MÓDULO 10 · SEMESTRE 2</div>
+          <div class="module-name">Projetos e Portfólio</div>
+        </div>
+      </div>
+      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 38–40 · 3 semanas</div>
+      <ul class="module-topics">
+        <li>Projeto integrador end-to-end</li>
+        <li>SQL → EDA → ML → Deploy</li>
+        <li>Construção de portfólio e carreira</li>
+      </ul>
+      <span class="module-badge badge-wip">⟳ Em produção</span>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── PORTFÓLIO ── -->
+<section id="portfolio">
+  <div class="section-header">
+    <div class="section-eyebrow">O que você vai construir</div>
+    <h2 class="section-title">10 projetos reais<br />para o seu GitHub</h2>
+    <p class="section-sub">Cada módulo termina com um projeto de portfólio com rubrica de avaliação — prontos para mostrar a recrutadores.</p>
+  </div>
+
+  <div class="portfolio-grid">
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-info">
+        <div class="project-module">Módulo 01 · Fundamentos</div>
+        <div class="project-name">Relatório de Mapa de Carreira em DS</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-info">
+        <div class="project-module">Módulo 02 · SQL</div>
+        <div class="project-name">Análise de Base de Dados de E-commerce com SQL Puro</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-info">
+        <div class="project-module">Módulo 03 · SQL Avançado</div>
+        <div class="project-name">Dashboard de Métricas com CTEs e Window Functions</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <div class="project-info">
+        <div class="project-module">Módulo 04 · Python</div>
+        <div class="project-name">Análise Exploratória com pandas e NumPy</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">05</div>
+      <div class="project-info">
+        <div class="project-module">Módulo 05 · EDA</div>
+        <div class="project-name">Relatório Completo de EDA com Storytelling Visual</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">06</div>
+      <div class="project-info">
+        <div class="project-module">Módulo 06 · Estatística</div>
+        <div class="project-name">Análise A/B Test com Significância Estatística</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">07</div>
+      <div class="project-info">
+        <div class="project-module">Módulo 07 · ML Básico</div>
+        <div class="project-name">Pipeline de ML: Previsão de Churn</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">08</div>
+      <div class="project-info">
+        <div class="project-module">Módulo 08 · Deep Learning</div>
+        <div class="project-name">Classificador de Imagens ou Análise de Sentimento</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">09</div>
+      <div class="project-info">
+        <div class="project-module">Módulo 09 · Big Data</div>
+        <div class="project-name">Pipeline de Dados com PySpark</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">10</div>
+      <div class="project-info">
+        <div class="project-module">Módulo 10 · Integrador</div>
+        <div class="project-name">Projeto End-to-End: SQL → EDA → ML → Deploy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── CONTRIBUIR ── -->
+<section id="contribuir">
+  <div class="section-header">
+    <div class="section-eyebrow">Open source</div>
+    <h2 class="section-title">Construído pela comunidade<br />brasileira de dados</h2>
+    <p class="section-sub">Qualquer contribuição — de uma correção de typo a um módulo inteiro — é bem-vinda e reconhecida.</p>
+  </div>
+
+  <div class="contribute-grid">
+    <div class="contribute-item">
+      <span class="contribute-emoji">🐛</span>
+      <div class="contribute-text">
+        <div class="ct-title">Reportar erros</div>
+        <div class="ct-desc">Informação incorreta, link quebrado, dados desatualizados — abra uma issue.</div>
+      </div>
+    </div>
+    <div class="contribute-item">
+      <span class="contribute-emoji">✍️</span>
+      <div class="contribute-text">
+        <div class="ct-title">Escrever conteúdo</div>
+        <div class="ct-desc">As semanas 3–40 ainda precisam de material manual — cada semana que você escrever ajuda centenas de pessoas.</div>
+      </div>
+    </div>
+    <div class="contribute-item">
+      <span class="contribute-emoji">🌐</span>
+      <div class="contribute-text">
+        <div class="ct-title">Indicar recursos em PT-BR</div>
+        <div class="ct-desc">Conhece um canal, livro ou artigo bom em português? Sugira via issue ou PR.</div>
+      </div>
+    </div>
+    <div class="contribute-item">
+      <span class="contribute-emoji">💡</span>
+      <div class="contribute-text">
+        <div class="ct-title">Propor exercícios</div>
+        <div class="ct-desc">Exercícios com dados brasileiros reais e enunciado claro são sempre bem-vindos.</div>
+      </div>
+    </div>
+    <div class="contribute-item">
+      <span class="contribute-emoji">🔧</span>
+      <div class="contribute-text">
+        <div class="ct-title">Melhorar a plataforma</div>
+        <div class="ct-desc">Acessibilidade, responsividade mobile, modo claro — contribuições técnicas ao HTML são aceitas.</div>
+      </div>
+    </div>
+    <div class="contribute-item">
+      <span class="contribute-emoji">🌍</span>
+      <div class="contribute-text">
+        <div class="ct-title">Traduzir recursos</div>
+        <div class="ct-desc">Ótimos artigos em inglês que ainda não estão no curso — traduza e contribua.</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="CONTRIBUTING.md" class="btn-primary" style="display:inline-flex;">
+    📖 Leia o guia completo de contribuição
+  </a>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── CHANGELOG ── -->
+<section id="changelog">
+  <div class="section-header">
+    <div class="section-eyebrow">Histórico do projeto</div>
+    <h2 class="section-title">Roadmap e Changelog</h2>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:rgba(61,220,151,0.15); border:1px solid rgba(61,220,151,0.4);">✅</div>
+      <div class="timeline-body">
+        <div class="timeline-version">v1.0.0 · 2025</div>
+        <div class="timeline-title">Lançamento inicial</div>
+        <ul class="timeline-list">
+          <li>Plataforma web interativa com navegação pelos 10 módulos</li>
+          <li>Conteúdo manual completo das Semanas 1 e 2 (Módulo 1)</li>
+          <li>Geração de conteúdo por IA (Claude) para semanas 3–40</li>
+          <li>README, CONTRIBUTING, LICENSE e CHANGELOG</li>
+          <li>Projeto do Módulo 1 com checklist interativo</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:rgba(255,159,67,0.15); border:1px solid rgba(255,159,67,0.4);">🔄</div>
+      <div class="timeline-body">
+        <div class="timeline-version">v1.1.0 · Em produção</div>
+        <div class="timeline-title">Módulo 2 — SQL completo</div>
+        <ul class="timeline-list">
+          <li class="planned">Conteúdo manual das Semanas 3–7 (SQL Fundamentos)</li>
+          <li class="planned">Templates de issues no GitHub</li>
+          <li class="planned">Arquivo CONTRIBUTORS.md</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:rgba(56,217,255,0.10); border:1px solid var(--border2);">📋</div>
+      <div class="timeline-body">
+        <div class="timeline-version">v1.2.0 · Planejado</div>
+        <div class="timeline-title">Módulos 3 e 4 — SQL Avançado + Python</div>
+        <ul class="timeline-list">
+          <li class="planned">Semanas 8–14 com conteúdo manual revisado</li>
+          <li class="planned">Sistema de progresso persistente na plataforma</li>
+          <li class="planned">Versão mobile melhorada</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:rgba(124,111,255,0.10); border:1px solid var(--border);">🌟</div>
+      <div class="timeline-body">
+        <div class="timeline-version">v2.0.0 · Visão futura</div>
+        <div class="timeline-title">Formação completa</div>
+        <ul class="timeline-list">
+          <li class="planned">Todos os 40 módulos com conteúdo manual revisado</li>
+          <li class="planned">Trilhas personalizadas por área (fintech, saúde, agro)</li>
+          <li class="planned">Notebooks Jupyter para todos os exercícios</li>
+          <li class="planned">Fórum integrado via GitHub Discussions</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── DOCS ── -->
+<section id="docs">
+  <div class="section-header">
+    <div class="section-eyebrow">Documentação</div>
+    <h2 class="section-title">Tudo no repositório</h2>
+  </div>
+
+  <div class="docs-grid">
+    <a href="README.md" class="doc-link">
+      <div class="doc-link-icon">📄</div>
+      <div class="doc-link-title">README.md</div>
+      <div class="doc-link-desc">Visão geral, estrutura de pastas e como usar o projeto.</div>
+    </a>
+    <a href="CONTRIBUTING.md" class="doc-link">
+      <div class="doc-link-icon">🤝</div>
+      <div class="doc-link-title">CONTRIBUTING.md</div>
+      <div class="doc-link-desc">Guia completo de como contribuir com conteúdo, código ou recursos.</div>
+    </a>
+    <a href="CHANGELOG.md" class="doc-link">
+      <div class="doc-link-icon">📋</div>
+      <div class="doc-link-title">CHANGELOG.md</div>
+      <div class="doc-link-desc">Histórico de versões e roadmap de desenvolvimento.</div>
+    </a>
+    <a href="LICENSE.md" class="doc-link">
+      <div class="doc-link-icon">⚖️</div>
+      <div class="doc-link-title">LICENSE.md</div>
+      <div class="doc-link-desc">MIT (código) + CC BY 4.0 (conteúdo) — livre para usar e adaptar.</div>
+    </a>
+    <a href="plataforma/curso_data_science.html" class="doc-link">
+      <div class="doc-link-icon">🖥️</div>
+      <div class="doc-link-title">Plataforma</div>
+      <div class="doc-link-desc">Interface interativa do curso com navegação por módulos e semanas.</div>
+    </a>
+  </div>
+
+  <div class="license-row">
+    <a href="https://creativecommons.org/licenses/by/4.0/" class="license-badge">
+      📝 Conteúdo — CC BY 4.0
+    </a>
+    <a href="LICENSE.md" class="license-badge">
+      💻 Código — MIT License
+    </a>
+    <span class="license-badge" style="cursor:default;">
+      🇧🇷 Idioma — Português BR
+    </span>
+    <span class="license-badge" style="cursor:default;">
+      🟡 Status — Em desenvolvimento
+    </span>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-icon">📊</div>
+    DataPath
+  </div>
+  <div class="footer-right">
+    Feito com 💜 para a comunidade brasileira de dados ·
+    Criado com o apoio do <a href="https://claude.ai">Anthropic Claude</a> ·
+    <a href="https://www.datahackers.com.br">DataHackers</a>
+  </div>
+</footer>
+
+</body>
+</ht
