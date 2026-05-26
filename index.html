@@ -7,42 +7,46 @@
   <meta name="description" content="Trilha completa de formação em Ciência de Dados em português do Brasil — do SQL básico ao Deep Learning, gratuita e open source." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ── RESET & TOKENS ── */
+    /* ── RESET ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
+    /* ── TOKENS ── */
     :root {
-      --bg:       #09090f;
-      --bg2:      #111120;
-      --bg3:      #1a1a2e;
-      --border:   #2a2a45;
-      --border2:  #3d3d60;
+      --bg:         #f0f4ff;
+      --bg2:        #ffffff;
+      --bg3:        #e8eeff;
+      --bg4:        #dce3ff;
 
-      --text:     #f0f0fa;
-      --text2:    #9898b8;
-      --text3:    #5a5a80;
+      --navy:       #1e2d5a;
+      --navy2:      #2e4080;
+      --text:       #1e2d5a;
+      --text2:      #4a5a8a;
+      --text3:      #7a8ab8;
+      --muted:      #a0aac8;
 
-      --violet:   #7c6fff;
-      --pink:     #ff6b9d;
-      --cyan:     #38d9ff;
-      --green:    #3ddc97;
-      --orange:   #ff9f43;
-      --yellow:   #ffd166;
+      --blue:       #4361ee;
+      --blue2:      #3451d1;
+      --indigo:     #5e72e4;
+      --green:      #0caf60;
+      --orange:     #f4832a;
+      --pink:       #e84393;
+      --cyan:       #0ea5e9;
+      --yellow:     #f59e0b;
 
-      --gv: rgba(124,111,255,0.12);
-      --gp: rgba(255,107,157,0.10);
-      --gc: rgba(56,217,255,0.10);
-      --gg: rgba(61,220,151,0.10);
+      --border:     #d0d8f0;
+      --border2:    #b8c2e0;
+      --shadow:     0 2px 16px rgba(30,45,90,0.08);
+      --shadow2:    0 8px 32px rgba(30,45,90,0.12);
 
-      --r: 14px;
-      --r2: 8px;
-      --shadow: 0 4px 32px rgba(0,0,0,0.5);
+      --r:  14px;
+      --r2:  8px;
     }
 
     body {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'DM Sans', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
@@ -52,121 +56,126 @@
     /* ── NAV ── */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(9,9,15,0.85);
+      background: rgba(240,244,255,0.92);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       padding: 0 clamp(1rem, 5vw, 3rem);
       display: flex; align-items: center; justify-content: space-between;
-      height: 60px;
+      height: 64px;
     }
 
     .nav-logo {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Playfair Display', Georgia, serif;
       font-weight: 800;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       display: flex; align-items: center; gap: 10px;
-      text-decoration: none; color: var(--text);
+      text-decoration: none; color: var(--navy);
+      letter-spacing: -0.02em;
     }
 
     .nav-logo-icon {
-      width: 30px; height: 30px;
-      background: linear-gradient(135deg, var(--violet), var(--cyan));
-      border-radius: 8px;
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      border-radius: 9px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 14px;
+      font-size: 15px;
+      box-shadow: 0 2px 8px rgba(67,97,238,0.3);
     }
 
     .nav-links {
-      display: flex; gap: 8px; align-items: center; list-style: none;
+      display: flex; gap: 4px; align-items: center; list-style: none;
     }
 
     .nav-links a {
-      font-size: 0.82rem;
-      font-family: 'DM Mono', monospace;
+      font-size: 0.88rem;
+      font-weight: 500;
       color: var(--text2);
       text-decoration: none;
-      padding: 6px 12px;
+      padding: 7px 14px;
       border-radius: var(--r2);
       transition: all 0.15s;
     }
 
-    .nav-links a:hover { color: var(--text); background: var(--bg3); }
+    .nav-links a:hover { color: var(--navy); background: var(--bg3); }
 
     .nav-cta {
-      background: var(--violet) !important;
+      background: var(--blue) !important;
       color: #fff !important;
-      font-weight: 500 !important;
+      border-radius: var(--r2) !important;
+      box-shadow: 0 2px 10px rgba(67,97,238,0.3);
     }
 
-    .nav-cta:hover { background: #6058e5 !important; }
+    .nav-cta:hover {
+      background: var(--blue2) !important;
+      box-shadow: 0 4px 16px rgba(67,97,238,0.4) !important;
+      transform: translateY(-1px);
+    }
 
     /* ── HERO ── */
     .hero {
-      position: relative;
-      padding: clamp(4rem, 10vw, 8rem) clamp(1rem, 5vw, 3rem) clamp(3rem, 8vw, 6rem);
+      padding: clamp(4rem, 10vw, 7rem) clamp(1rem, 5vw, 3rem) clamp(3rem, 7vw, 5rem);
       text-align: center;
-      overflow: hidden;
+      position: relative;
     }
 
     .hero::before {
       content: '';
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 20% 30%, rgba(124,111,255,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 80% 70%, rgba(56,217,255,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 35% at 60% 10%, rgba(255,107,157,0.10) 0%, transparent 70%);
+        radial-gradient(ellipse 70% 60% at 50% 0%, rgba(67,97,238,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
 
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--gv);
-      border: 1px solid rgba(124,111,255,0.35);
+      background: var(--bg2);
+      border: 1px solid var(--border);
       border-radius: 100px;
-      padding: 6px 16px;
+      padding: 6px 18px;
       font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--violet);
+      font-size: 0.72rem;
+      color: var(--blue);
       letter-spacing: 0.5px;
-      margin-bottom: 28px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow);
     }
 
-    .hero-badge-dot {
-      width: 6px; height: 6px;
+    .badge-dot {
+      width: 7px; height: 7px;
       background: var(--green);
       border-radius: 50%;
-      animation: pulse 2s infinite;
+      animation: pulse 2.2s ease-in-out infinite;
     }
 
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
+      50% { opacity: 0.4; transform: scale(0.7); }
     }
 
     .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.4rem, 7vw, 5rem);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.8rem, 7.5vw, 5.2rem);
       font-weight: 800;
-      line-height: 1.05;
+      line-height: 1.08;
       letter-spacing: -0.03em;
+      color: var(--navy);
       margin-bottom: 24px;
-      max-width: 800px;
+      max-width: 820px;
       margin-left: auto; margin-right: auto;
     }
 
-    .hero h1 .gradient-text {
-      background: linear-gradient(135deg, var(--violet) 0%, var(--cyan) 50%, var(--green) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .hero h1 em {
+      font-style: italic;
+      color: var(--blue);
     }
 
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-size: clamp(1rem, 2.2vw, 1.18rem);
       color: var(--text2);
-      max-width: 580px;
+      max-width: 560px;
       margin: 0 auto 40px;
-      line-height: 1.7;
+      line-height: 1.75;
+      font-weight: 400;
     }
 
     .hero-actions {
@@ -176,105 +185,178 @@
 
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
-      background: linear-gradient(135deg, var(--violet), #5a52d0);
+      background: var(--blue);
       color: #fff;
-      padding: 14px 28px;
+      padding: 14px 30px;
       border-radius: var(--r);
       font-weight: 600;
       font-size: 0.95rem;
       text-decoration: none;
       transition: all 0.2s;
-      box-shadow: 0 4px 20px rgba(124,111,255,0.35);
+      box-shadow: 0 4px 18px rgba(67,97,238,0.35);
     }
 
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,111,255,0.45); }
+    .btn-primary:hover {
+      background: var(--blue2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(67,97,238,0.45);
+    }
 
     .btn-secondary {
       display: inline-flex; align-items: center; gap: 8px;
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border2);
-      padding: 14px 28px;
+      background: var(--bg2);
+      color: var(--navy);
+      border: 1.5px solid var(--border);
+      padding: 14px 30px;
       border-radius: var(--r);
       font-weight: 500;
       font-size: 0.95rem;
       text-decoration: none;
       transition: all 0.2s;
+      box-shadow: var(--shadow);
     }
 
-    .btn-secondary:hover { background: var(--bg3); border-color: var(--violet); }
+    .btn-secondary:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow2);
+    }
 
     /* ── STATS BAR ── */
+    .stats-wrap {
+      padding: 0 clamp(1rem, 5vw, 3rem);
+      margin-bottom: 0;
+    }
+
     .stats-bar {
-      margin: 0 clamp(1rem, 5vw, 3rem);
-      padding: 32px 40px;
       background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: var(--r);
-      display: flex; flex-wrap: wrap; gap: 32px;
-      justify-content: space-around;
-      align-items: center;
+      padding: 36px 48px;
+      display: flex; flex-wrap: wrap; gap: 16px;
+      justify-content: space-around; align-items: center;
+      box-shadow: var(--shadow);
     }
 
     .stat-item { text-align: center; }
 
     .stat-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 2.2rem;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.6rem;
       font-weight: 800;
       line-height: 1;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
+      letter-spacing: -0.03em;
     }
 
     .stat-label {
       font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--text3);
+      font-size: 0.7rem;
+      color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 1.5px;
     }
 
-    .stat-num.v { color: var(--violet); }
-    .stat-num.c { color: var(--cyan); }
-    .stat-num.g { color: var(--green); }
-    .stat-num.o { color: var(--orange); }
-    .stat-num.p { color: var(--pink); }
+    .c-blue   { color: var(--blue); }
+    .c-green  { color: var(--green); }
+    .c-orange { color: var(--orange); }
+    .c-pink   { color: var(--pink); }
+    .c-cyan   { color: var(--cyan); }
 
-    /* ── SECTION ── */
-    section { padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 3rem); }
-
-    .section-header {
-      margin-bottom: 48px;
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 clamp(1rem, 5vw, 3rem);
     }
 
+    /* ── SECTIONS ── */
+    section {
+      padding: clamp(3rem, 8vw, 5.5rem) clamp(1rem, 5vw, 3rem);
+    }
+
+    .section-header { margin-bottom: 48px; }
+
     .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
       font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: var(--violet);
-      margin-bottom: 10px;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 2px;
+      background: var(--blue);
+      border-radius: 2px;
     }
 
     .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
       font-weight: 800;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
       line-height: 1.15;
+      color: var(--navy);
     }
+
+    .section-title em { font-style: italic; color: var(--blue); }
 
     .section-sub {
-      margin-top: 12px;
+      margin-top: 14px;
       color: var(--text2);
       font-size: 1rem;
-      max-width: 560px;
+      max-width: 540px;
+      line-height: 1.75;
     }
 
-    /* ── MODULES GRID ── */
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 28px 26px;
+      transition: all 0.2s;
+      box-shadow: var(--shadow);
+    }
+
+    .feature-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow2);
+    }
+
+    .feature-icon { font-size: 1.8rem; margin-bottom: 14px; }
+
+    .feature-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .feature-desc {
+      font-size: 0.88rem;
+      color: var(--text2);
+      line-height: 1.65;
+    }
+
+    /* ── MÓDULOS ── */
     .modules-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
       gap: 16px;
     }
 
@@ -284,44 +366,45 @@
       border-radius: var(--r);
       padding: 24px;
       transition: all 0.2s;
-      cursor: default;
+      box-shadow: var(--shadow);
       position: relative;
       overflow: hidden;
     }
 
-    .module-card::before {
+    .module-card::after {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      border-radius: var(--r) var(--r) 0 0;
+      top: 0; left: 0; bottom: 0;
+      width: 4px;
+      border-radius: var(--r) 0 0 var(--r);
     }
+
+    .module-card:nth-child(1)::after  { background: var(--blue); }
+    .module-card:nth-child(2)::after  { background: var(--cyan); }
+    .module-card:nth-child(3)::after  { background: var(--green); }
+    .module-card:nth-child(4)::after  { background: var(--orange); }
+    .module-card:nth-child(5)::after  { background: var(--pink); }
+    .module-card:nth-child(6)::after  { background: var(--yellow); }
+    .module-card:nth-child(7)::after  { background: var(--blue); }
+    .module-card:nth-child(8)::after  { background: var(--cyan); }
+    .module-card:nth-child(9)::after  { background: var(--green); }
+    .module-card:nth-child(10)::after { background: var(--orange); }
 
     .module-card:hover {
       border-color: var(--border2);
       transform: translateY(-3px);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow2);
     }
 
-    .module-card:nth-child(1)::before { background: var(--violet); }
-    .module-card:nth-child(2)::before { background: var(--cyan); }
-    .module-card:nth-child(3)::before { background: var(--green); }
-    .module-card:nth-child(4)::before { background: var(--orange); }
-    .module-card:nth-child(5)::before { background: var(--pink); }
-    .module-card:nth-child(6)::before { background: var(--yellow); }
-    .module-card:nth-child(7)::before { background: var(--violet); }
-    .module-card:nth-child(8)::before { background: var(--cyan); }
-    .module-card:nth-child(9)::before { background: var(--green); }
-    .module-card:nth-child(10)::before { background: var(--orange); }
-
     .module-header {
-      display: flex; align-items: flex-start; gap: 12px;
+      display: flex; align-items: flex-start; gap: 14px;
       margin-bottom: 14px;
+      padding-left: 12px;
     }
 
     .module-icon {
-      width: 42px; height: 42px;
-      border-radius: 10px;
+      width: 44px; height: 44px;
+      border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       font-size: 20px;
       flex-shrink: 0;
@@ -329,102 +412,75 @@
 
     .module-num {
       font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--text3);
+      font-size: 0.68rem;
+      color: var(--muted);
       letter-spacing: 1px;
+      text-transform: uppercase;
       margin-bottom: 4px;
     }
 
     .module-name {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Playfair Display', Georgia, serif;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
+      color: var(--navy);
       line-height: 1.3;
     }
 
     .module-weeks {
       font-size: 0.78rem;
-      color: var(--text2);
+      color: var(--text3);
       margin-bottom: 12px;
+      padding-left: 12px;
       display: flex; align-items: center; gap: 6px;
-    }
-
-    .weeks-dot {
-      width: 4px; height: 4px;
-      border-radius: 50%;
-      background: var(--text3);
     }
 
     .module-topics {
       list-style: none;
-      display: flex; flex-direction: column; gap: 6px;
+      display: flex; flex-direction: column; gap: 5px;
+      padding-left: 12px;
     }
 
     .module-topics li {
-      font-size: 0.82rem;
+      font-size: 0.83rem;
       color: var(--text2);
-      display: flex; align-items: center; gap: 8px;
+      display: flex; align-items: flex-start; gap: 8px;
+      line-height: 1.5;
     }
 
     .module-topics li::before {
-      content: '→';
-      color: var(--text3);
-      font-size: 0.7rem;
+      content: '–';
+      color: var(--muted);
       flex-shrink: 0;
     }
 
     .module-badge {
       display: inline-flex;
       margin-top: 14px;
+      margin-left: 12px;
       font-family: 'DM Mono', monospace;
       font-size: 0.68rem;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 100px;
       letter-spacing: 0.5px;
     }
 
-    .badge-done { background: rgba(61,220,151,0.12); color: var(--green); border: 1px solid rgba(61,220,151,0.3); }
-    .badge-wip  { background: rgba(255,159,67,0.12);  color: var(--orange); border: 1px solid rgba(255,159,67,0.3); }
-
-    /* ── ABOUT / FEATURES ── */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
+    .badge-done {
+      background: rgba(12,175,96,0.1);
+      color: var(--green);
+      border: 1px solid rgba(12,175,96,0.25);
     }
 
-    .feature-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 28px 24px;
-      transition: border-color 0.2s;
+    .badge-wip {
+      background: rgba(244,131,42,0.1);
+      color: var(--orange);
+      border: 1px solid rgba(244,131,42,0.25);
     }
 
-    .feature-card:hover { border-color: var(--border2); }
-
-    .feature-icon {
-      font-size: 2rem;
-      margin-bottom: 14px;
-    }
-
-    .feature-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      margin-bottom: 8px;
-    }
-
-    .feature-desc {
-      font-size: 0.88rem;
-      color: var(--text2);
-      line-height: 1.6;
-    }
-
-    /* ── PORTFOLIO TABLE ── */
+    /* ── PORTFÓLIO ── */
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
       gap: 14px;
     }
 
@@ -432,61 +488,63 @@
       background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: var(--r);
-      padding: 22px;
-      display: flex; gap: 16px; align-items: flex-start;
+      padding: 22px 24px;
+      display: flex; gap: 18px; align-items: flex-start;
       transition: all 0.2s;
+      box-shadow: var(--shadow);
     }
 
-    .project-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+    .project-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow2);
+    }
 
     .project-num {
-      width: 36px; height: 36px;
+      width: 38px; height: 38px;
       border-radius: 50%;
       background: var(--bg3);
-      border: 1px solid var(--border2);
-      font-family: 'Syne', sans-serif;
-      font-size: 0.8rem;
+      border: 1.5px solid var(--border);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.9rem;
       font-weight: 800;
-      color: var(--text2);
+      color: var(--blue);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
 
-    .project-info {}
-
     .project-module {
       font-family: 'DM Mono', monospace;
       font-size: 0.68rem;
-      color: var(--text3);
+      color: var(--muted);
       letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
 
     .project-name {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       font-weight: 600;
-      line-height: 1.4;
+      color: var(--navy);
+      line-height: 1.45;
     }
 
     /* ── TIMELINE ── */
     .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      max-width: 700px;
+      display: flex; flex-direction: column; gap: 0;
+      max-width: 680px;
     }
 
     .timeline-item {
       display: flex; gap: 24px;
-      padding-bottom: 32px;
+      padding-bottom: 36px;
       position: relative;
     }
 
     .timeline-item:not(:last-child)::after {
       content: '';
       position: absolute;
-      left: 19px; top: 40px; bottom: 0;
+      left: 19px; top: 42px; bottom: 0;
       width: 1px;
       background: var(--border);
     }
@@ -498,34 +556,37 @@
       font-size: 1.1rem;
       flex-shrink: 0;
       position: relative; z-index: 1;
+      border: 1.5px solid var(--border);
+      background: var(--bg2);
+      box-shadow: var(--shadow);
     }
-
-    .timeline-body {}
 
     .timeline-version {
       font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--text3);
+      font-size: 0.7rem;
+      color: var(--muted);
       letter-spacing: 1px;
-      margin-bottom: 4px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
     }
 
     .timeline-title {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Playfair Display', Georgia, serif;
       font-weight: 700;
-      font-size: 1rem;
-      margin-bottom: 8px;
+      font-size: 1.05rem;
+      color: var(--navy);
+      margin-bottom: 10px;
     }
 
     .timeline-list {
       list-style: none;
-      display: flex; flex-direction: column; gap: 5px;
+      display: flex; flex-direction: column; gap: 6px;
     }
 
     .timeline-list li {
-      font-size: 0.85rem;
+      font-size: 0.87rem;
       color: var(--text2);
-      display: flex; align-items: flex-start; gap: 8px;
+      display: flex; align-items: flex-start; gap: 10px;
       line-height: 1.5;
     }
 
@@ -534,15 +595,17 @@
       color: var(--green);
       font-weight: 700;
       flex-shrink: 0;
-      margin-top: 1px;
     }
 
-    .timeline-list li.planned::before { content: '◦'; color: var(--text3); }
+    .timeline-list li.planned::before {
+      content: '◦';
+      color: var(--muted);
+    }
 
-    /* ── CONTRIBUTE ── */
+    /* ── CONTRIBUIR ── */
     .contribute-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 14px;
       margin-bottom: 40px;
     }
@@ -551,24 +614,34 @@
       background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: var(--r);
-      padding: 22px 20px;
+      padding: 24px 20px;
       display: flex; gap: 14px; align-items: flex-start;
-      transition: border-color 0.2s;
+      transition: all 0.2s;
+      box-shadow: var(--shadow);
     }
 
-    .contribute-item:hover { border-color: var(--border2); }
-
-    .contribute-emoji { font-size: 1.4rem; flex-shrink: 0; }
-
-    .contribute-text .ct-title {
-      font-weight: 600; font-size: 0.9rem; margin-bottom: 4px;
+    .contribute-item:hover {
+      border-color: var(--blue);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow2);
     }
 
-    .contribute-text .ct-desc {
-      font-size: 0.82rem; color: var(--text2); line-height: 1.5;
+    .contribute-emoji { font-size: 1.5rem; flex-shrink: 0; }
+
+    .ct-title {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--navy);
+      margin-bottom: 5px;
     }
 
-    /* ── DOCS LINKS ── */
+    .ct-desc {
+      font-size: 0.83rem;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    /* ── DOCS ── */
     .docs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -579,14 +652,19 @@
       background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: var(--r);
-      padding: 20px;
+      padding: 22px 20px;
       text-decoration: none;
       color: var(--text);
       display: flex; flex-direction: column; gap: 8px;
       transition: all 0.2s;
+      box-shadow: var(--shadow);
     }
 
-    .doc-link:hover { border-color: var(--violet); background: var(--bg3); transform: translateY(-2px); }
+    .doc-link:hover {
+      border-color: var(--blue);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow2);
+    }
 
     .doc-link-icon { font-size: 1.6rem; }
 
@@ -594,99 +672,80 @@
       font-family: 'DM Mono', monospace;
       font-size: 0.8rem;
       font-weight: 500;
-      letter-spacing: 0.5px;
+      color: var(--navy);
+      letter-spacing: 0.3px;
     }
 
     .doc-link-desc {
       font-size: 0.78rem;
       color: var(--text3);
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
-    /* ── LICENSE BADGES ── */
+    /* ── LICENÇAS ── */
     .license-row {
-      display: flex; flex-wrap: wrap; gap: 12px;
+      display: flex; flex-wrap: wrap; gap: 10px;
       margin-top: 32px;
     }
 
     .license-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--bg3);
+      background: var(--bg2);
       border: 1px solid var(--border);
       border-radius: var(--r2);
       padding: 8px 16px;
       font-family: 'DM Mono', monospace;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text2);
       text-decoration: none;
-      transition: all 0.2s;
+      transition: all 0.15s;
+      box-shadow: var(--shadow);
     }
 
-    .license-badge:hover { border-color: var(--violet); color: var(--text); }
+    .license-badge:hover { border-color: var(--blue); color: var(--blue); }
 
     /* ── FOOTER ── */
     footer {
-      border-top: 1px solid var(--border);
+      background: var(--navy);
+      color: rgba(255,255,255,0.7);
       padding: 40px clamp(1rem, 5vw, 3rem);
       display: flex; flex-wrap: wrap; gap: 16px;
       justify-content: space-between; align-items: center;
     }
 
-    .footer-left {
+    .footer-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #fff;
       display: flex; align-items: center; gap: 10px;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
     }
 
-    .footer-icon {
-      width: 26px; height: 26px;
-      background: linear-gradient(135deg, var(--violet), var(--cyan));
-      border-radius: 7px;
+    .footer-logo-icon {
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 12px;
+      font-size: 13px;
     }
 
     .footer-right {
       font-size: 0.82rem;
-      color: var(--text3);
     }
 
-    .footer-right a { color: var(--text2); text-decoration: none; }
-    .footer-right a:hover { color: var(--violet); }
-
-    /* ── DIVIDER ── */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-      margin: 0 clamp(1rem, 5vw, 3rem);
-    }
-
-    /* ── UTILS ── */
-    .tag {
-      display: inline-flex;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      padding: 3px 10px;
-      border-radius: 100px;
-      letter-spacing: 0.5px;
-    }
-
-    .tag-violet { background: var(--gv); color: var(--violet); border: 1px solid rgba(124,111,255,0.25); }
-    .tag-cyan   { background: var(--gc); color: var(--cyan);   border: 1px solid rgba(56,217,255,0.25); }
-    .tag-green  { background: var(--gg); color: var(--green);  border: 1px solid rgba(61,220,151,0.25); }
-    .tag-pink   { background: var(--gp); color: var(--pink);   border: 1px solid rgba(255,107,157,0.25); }
+    .footer-right a { color: rgba(255,255,255,0.6); text-decoration: none; }
+    .footer-right a:hover { color: #fff; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       .nav-links { display: none; }
-      .stats-bar { padding: 24px; gap: 20px; }
+      .stats-bar { padding: 24px 20px; gap: 20px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
     <span class="nav-logo-icon">📊</span>
@@ -700,19 +759,19 @@
   </ul>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <header class="hero">
   <div class="hero-badge">
-    <span class="hero-badge-dot"></span>
+    <span class="badge-dot"></span>
     Curso aberto · Em desenvolvimento ativo · PT-BR
   </div>
   <h1>
     Formação completa em<br />
-    <span class="gradient-text">Ciência de Dados</span>
+    <em>Ciência de Dados</em>
   </h1>
   <p class="hero-sub">
     Do SQL básico ao Deep Learning — trilha de 40 semanas em português do Brasil,
-    com exercícios práticos, projetos de portfólio reais e curadoria de recursos.
+    com exercícios práticos, projetos reais para o portfólio e curadoria de recursos.
     Gratuito e open source.
   </p>
   <div class="hero-actions">
@@ -725,37 +784,39 @@
   </div>
 </header>
 
-<!-- ── STATS ── -->
-<div class="stats-bar">
-  <div class="stat-item">
-    <div class="stat-num v">40</div>
-    <div class="stat-label">Semanas</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num c">10</div>
-    <div class="stat-label">Módulos</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num g">10+</div>
-    <div class="stat-label">Projetos de Portfólio</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num o">2h</div>
-    <div class="stat-label">Por dia</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num p">100%</div>
-    <div class="stat-label">Gratuito</div>
+<!-- STATS -->
+<div class="stats-wrap">
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num c-blue">40</div>
+      <div class="stat-label">Semanas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num c-cyan">10</div>
+      <div class="stat-label">Módulos</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num c-green">10+</div>
+      <div class="stat-label">Projetos de portfólio</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num c-orange">2h</div>
+      <div class="stat-label">Por dia</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num c-pink">100%</div>
+      <div class="stat-label">Gratuito</div>
+    </div>
   </div>
 </div>
 
-<div class="divider" style="margin-top: 0; margin-bottom: 0;"></div>
+<div class="divider" style="margin-top:0;"></div>
 
-<!-- ── PARA QUEM É ── -->
+<!-- PARA QUEM É -->
 <section id="sobre">
   <div class="section-header">
     <div class="section-eyebrow">Para quem é este curso</div>
-    <h2 class="section-title">Do zero ao mercado,<br />em português</h2>
+    <h2 class="section-title">Do zero ao mercado,<br /><em>em português</em></h2>
     <p class="section-sub">Sem pré-requisitos técnicos para começar. Conteúdo pensado para a realidade brasileira.</p>
   </div>
   <div class="features-grid">
@@ -787,33 +848,32 @@
     <div class="feature-card">
       <div class="feature-icon">💼</div>
       <div class="feature-title">Portfólio desde o início</div>
-      <div class="feature-desc">Os projetos são pensados para ir direto ao GitHub — ao final você tem 10+ projetos prontos para mostrar ao mercado.</div>
+      <div class="feature-desc">Os projetos são pensados para ir direto ao GitHub — ao final você tem 10+ projetos prontos para o mercado.</div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ── MÓDULOS ── -->
+<!-- MÓDULOS -->
 <section id="modulos">
   <div class="section-header">
     <div class="section-eyebrow">Currículo completo</div>
-    <h2 class="section-title">10 módulos · 2 semestres</h2>
+    <h2 class="section-title">10 módulos · <em>2 semestres</em></h2>
     <p class="section-sub">Uma trilha progressiva que leva do fundamento ao estado da arte em Ciência de Dados.</p>
   </div>
 
   <div class="modules-grid">
 
-    <!-- M01 -->
     <div class="module-card">
       <div class="module-header">
-        <div class="module-icon" style="background:rgba(124,111,255,0.12);">🧭</div>
+        <div class="module-icon" style="background:#eef2ff;">🧭</div>
         <div>
-          <div class="module-num">MÓDULO 01 · SEMESTRE 1</div>
+          <div class="module-num">Módulo 01 · Semestre 1</div>
           <div class="module-name">Fundamentos de Ciência de Dados</div>
         </div>
       </div>
-      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 1–2 · 2 semanas</div>
+      <div class="module-weeks">📅 Semanas 1–2 · 2 semanas</div>
       <ul class="module-topics">
         <li>O que é Ciência de Dados e o mercado BR</li>
         <li>Carreiras, salários e áreas de atuação</li>
@@ -823,16 +883,15 @@
       <span class="module-badge badge-done">✓ Conteúdo completo</span>
     </div>
 
-    <!-- M02 -->
     <div class="module-card">
       <div class="module-header">
-        <div class="module-icon" style="background:rgba(56,217,255,0.12);">🗄️</div>
+        <div class="module-icon" style="background:#e0f8ff;">🗄️</div>
         <div>
-          <div class="module-num">MÓDULO 02 · SEMESTRE 1</div>
+          <div class="module-num">Módulo 02 · Semestre 1</div>
           <div class="module-name">SQL — Fundamentos</div>
         </div>
       </div>
-      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 3–7 · 5 semanas</div>
+      <div class="module-weeks">📅 Semanas 3–7 · 5 semanas</div>
       <ul class="module-topics">
         <li>Bancos relacionais e modelagem</li>
         <li>SELECT, WHERE, ORDER BY</li>
@@ -842,16 +901,15 @@
       <span class="module-badge badge-wip">⟳ Em produção</span>
     </div>
 
-    <!-- M03 -->
     <div class="module-card">
       <div class="module-header">
-        <div class="module-icon" style="background:rgba(61,220,151,0.12);">⚡</div>
+        <div class="module-icon" style="background:#e6fff4;">⚡</div>
         <div>
-          <div class="module-num">MÓDULO 03 · SEMESTRE 1</div>
+          <div class="module-num">Módulo 03 · Semestre 1</div>
           <div class="module-name">SQL Avançado + Python</div>
         </div>
       </div>
-      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 8–10 · 3 semanas</div>
+      <div class="module-weeks">📅 Semanas 8–10 · 3 semanas</div>
       <ul class="module-topics">
         <li>Subqueries e CTEs</li>
         <li>Window Functions</li>
@@ -860,16 +918,15 @@
       <span class="module-badge badge-wip">⟳ Em produção</span>
     </div>
 
-    <!-- M04 -->
     <div class="module-card">
       <div class="module-header">
-        <div class="module-icon" style="background:rgba(255,159,67,0.12);">🐍</div>
+        <div class="module-icon" style="background:#fff4e6;">🐍</div>
         <div>
-          <div class="module-num">MÓDULO 04 · SEMESTRE 1</div>
+          <div class="module-num">Módulo 04 · Semestre 1</div>
           <div class="module-name">Python para Ciência de Dados</div>
         </div>
       </div>
-      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 11–14 · 4 semanas</div>
+      <div class="module-weeks">📅 Semanas 11–14 · 4 semanas</div>
       <ul class="module-topics">
         <li>Python básico e estruturas de dados</li>
         <li>NumPy — vetores e matrizes</li>
@@ -878,16 +935,15 @@
       <span class="module-badge badge-wip">⟳ Em produção</span>
     </div>
 
-    <!-- M05 -->
     <div class="module-card">
       <div class="module-header">
-        <div class="module-icon" style="background:rgba(255,107,157,0.12);">📊</div>
+        <div class="module-icon" style="background:#fff0f6;">📊</div>
         <div>
-          <div class="module-num">MÓDULO 05 · SEMESTRE 1</div>
+          <div class="module-num">Módulo 05 · Semestre 1</div>
           <div class="module-name">EDA e Visualização</div>
         </div>
       </div>
-      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 15–19 · 5 semanas</div>
+      <div class="module-weeks">📅 Semanas 15–19 · 5 semanas</div>
       <ul class="module-topics">
         <li>Limpeza e tratamento de dados</li>
         <li>Estatística descritiva</li>
@@ -897,16 +953,15 @@
       <span class="module-badge badge-wip">⟳ Em produção</span>
     </div>
 
-    <!-- M06 -->
     <div class="module-card">
       <div class="module-header">
-        <div class="module-icon" style="background:rgba(255,209,102,0.12);">📐</div>
+        <div class="module-icon" style="background:#fffbea;">📐</div>
         <div>
-          <div class="module-num">MÓDULO 06 · SEMESTRE 1</div>
+          <div class="module-num">Módulo 06 · Semestre 1</div>
           <div class="module-name">Estatística e Probabilidade</div>
         </div>
       </div>
-      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 20–22 · 3 semanas</div>
+      <div class="module-weeks">📅 Semanas 20–22 · 3 semanas</div>
       <ul class="module-topics">
         <li>Probabilidade e distribuições</li>
         <li>Testes de hipótese e A/B test</li>
@@ -915,16 +970,15 @@
       <span class="module-badge badge-wip">⟳ Em produção</span>
     </div>
 
-    <!-- M07 -->
     <div class="module-card">
       <div class="module-header">
-        <div class="module-icon" style="background:rgba(124,111,255,0.12);">🤖</div>
+        <div class="module-icon" style="background:#eef2ff;">🤖</div>
         <div>
-          <div class="module-num">MÓDULO 07 · SEMESTRE 2</div>
+          <div class="module-num">Módulo 07 · Semestre 2</div>
           <div class="module-name">Machine Learning Básico</div>
         </div>
       </div>
-      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 23–28 · 6 semanas</div>
+      <div class="module-weeks">📅 Semanas 23–28 · 6 semanas</div>
       <ul class="module-topics">
         <li>Introdução ao ML e scikit-learn</li>
         <li>Regressão Linear e Logística</li>
@@ -934,16 +988,15 @@
       <span class="module-badge badge-wip">⟳ Em produção</span>
     </div>
 
-    <!-- M08 -->
     <div class="module-card">
       <div class="module-header">
-        <div class="module-icon" style="background:rgba(56,217,255,0.12);">🧠</div>
+        <div class="module-icon" style="background:#e0f8ff;">🧠</div>
         <div>
-          <div class="module-num">MÓDULO 08 · SEMESTRE 2</div>
+          <div class="module-num">Módulo 08 · Semestre 2</div>
           <div class="module-name">ML Avançado e Deep Learning</div>
         </div>
       </div>
-      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 29–33 · 5 semanas</div>
+      <div class="module-weeks">📅 Semanas 29–33 · 5 semanas</div>
       <ul class="module-topics">
         <li>Redes neurais e backpropagation</li>
         <li>CNN e Transfer Learning</li>
@@ -953,16 +1006,15 @@
       <span class="module-badge badge-wip">⟳ Em produção</span>
     </div>
 
-    <!-- M09 -->
     <div class="module-card">
       <div class="module-header">
-        <div class="module-icon" style="background:rgba(61,220,151,0.12);">☁️</div>
+        <div class="module-icon" style="background:#e6fff4;">☁️</div>
         <div>
-          <div class="module-num">MÓDULO 09 · SEMESTRE 2</div>
+          <div class="module-num">Módulo 09 · Semestre 2</div>
           <div class="module-name">Big Data, Cloud e Engenharia</div>
         </div>
       </div>
-      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 34–37 · 4 semanas</div>
+      <div class="module-weeks">📅 Semanas 34–37 · 4 semanas</div>
       <ul class="module-topics">
         <li>PySpark e processamento distribuído</li>
         <li>AWS / GCP / Azure para dados</li>
@@ -972,16 +1024,15 @@
       <span class="module-badge badge-wip">⟳ Em produção</span>
     </div>
 
-    <!-- M10 -->
     <div class="module-card">
       <div class="module-header">
-        <div class="module-icon" style="background:rgba(255,159,67,0.12);">🏆</div>
+        <div class="module-icon" style="background:#fff4e6;">🏆</div>
         <div>
-          <div class="module-num">MÓDULO 10 · SEMESTRE 2</div>
+          <div class="module-num">Módulo 10 · Semestre 2</div>
           <div class="module-name">Projetos e Portfólio</div>
         </div>
       </div>
-      <div class="module-weeks"><span class="weeks-dot"></span>Semanas 38–40 · 3 semanas</div>
+      <div class="module-weeks">📅 Semanas 38–40 · 3 semanas</div>
       <ul class="module-topics">
         <li>Projeto integrador end-to-end</li>
         <li>SQL → EDA → ML → Deploy</li>
@@ -995,140 +1046,92 @@
 
 <div class="divider"></div>
 
-<!-- ── PORTFÓLIO ── -->
+<!-- PORTFÓLIO -->
 <section id="portfolio">
   <div class="section-header">
     <div class="section-eyebrow">O que você vai construir</div>
-    <h2 class="section-title">10 projetos reais<br />para o seu GitHub</h2>
-    <p class="section-sub">Cada módulo termina com um projeto de portfólio com rubrica de avaliação — prontos para mostrar a recrutadores.</p>
+    <h2 class="section-title">10 projetos reais<br /><em>para o seu GitHub</em></h2>
+    <p class="section-sub">Cada módulo termina com um projeto com rubrica de avaliação — prontos para mostrar a recrutadores.</p>
   </div>
 
   <div class="portfolio-grid">
     <div class="project-card">
       <div class="project-num">01</div>
-      <div class="project-info">
-        <div class="project-module">Módulo 01 · Fundamentos</div>
-        <div class="project-name">Relatório de Mapa de Carreira em DS</div>
-      </div>
+      <div><div class="project-module">Módulo 01 · Fundamentos</div><div class="project-name">Relatório de Mapa de Carreira em DS</div></div>
     </div>
     <div class="project-card">
       <div class="project-num">02</div>
-      <div class="project-info">
-        <div class="project-module">Módulo 02 · SQL</div>
-        <div class="project-name">Análise de Base de Dados de E-commerce com SQL Puro</div>
-      </div>
+      <div><div class="project-module">Módulo 02 · SQL</div><div class="project-name">Análise de Base de Dados de E-commerce com SQL Puro</div></div>
     </div>
     <div class="project-card">
       <div class="project-num">03</div>
-      <div class="project-info">
-        <div class="project-module">Módulo 03 · SQL Avançado</div>
-        <div class="project-name">Dashboard de Métricas com CTEs e Window Functions</div>
-      </div>
+      <div><div class="project-module">Módulo 03 · SQL Avançado</div><div class="project-name">Dashboard de Métricas com CTEs e Window Functions</div></div>
     </div>
     <div class="project-card">
       <div class="project-num">04</div>
-      <div class="project-info">
-        <div class="project-module">Módulo 04 · Python</div>
-        <div class="project-name">Análise Exploratória com pandas e NumPy</div>
-      </div>
+      <div><div class="project-module">Módulo 04 · Python</div><div class="project-name">Análise Exploratória com pandas e NumPy</div></div>
     </div>
     <div class="project-card">
       <div class="project-num">05</div>
-      <div class="project-info">
-        <div class="project-module">Módulo 05 · EDA</div>
-        <div class="project-name">Relatório Completo de EDA com Storytelling Visual</div>
-      </div>
+      <div><div class="project-module">Módulo 05 · EDA</div><div class="project-name">Relatório Completo de EDA com Storytelling Visual</div></div>
     </div>
     <div class="project-card">
       <div class="project-num">06</div>
-      <div class="project-info">
-        <div class="project-module">Módulo 06 · Estatística</div>
-        <div class="project-name">Análise A/B Test com Significância Estatística</div>
-      </div>
+      <div><div class="project-module">Módulo 06 · Estatística</div><div class="project-name">Análise A/B Test com Significância Estatística</div></div>
     </div>
     <div class="project-card">
       <div class="project-num">07</div>
-      <div class="project-info">
-        <div class="project-module">Módulo 07 · ML Básico</div>
-        <div class="project-name">Pipeline de ML: Previsão de Churn</div>
-      </div>
+      <div><div class="project-module">Módulo 07 · ML Básico</div><div class="project-name">Pipeline de ML: Previsão de Churn</div></div>
     </div>
     <div class="project-card">
       <div class="project-num">08</div>
-      <div class="project-info">
-        <div class="project-module">Módulo 08 · Deep Learning</div>
-        <div class="project-name">Classificador de Imagens ou Análise de Sentimento</div>
-      </div>
+      <div><div class="project-module">Módulo 08 · Deep Learning</div><div class="project-name">Classificador de Imagens ou Análise de Sentimento</div></div>
     </div>
     <div class="project-card">
       <div class="project-num">09</div>
-      <div class="project-info">
-        <div class="project-module">Módulo 09 · Big Data</div>
-        <div class="project-name">Pipeline de Dados com PySpark</div>
-      </div>
+      <div><div class="project-module">Módulo 09 · Big Data</div><div class="project-name">Pipeline de Dados com PySpark</div></div>
     </div>
     <div class="project-card">
       <div class="project-num">10</div>
-      <div class="project-info">
-        <div class="project-module">Módulo 10 · Integrador</div>
-        <div class="project-name">Projeto End-to-End: SQL → EDA → ML → Deploy</div>
-      </div>
+      <div><div class="project-module">Módulo 10 · Integrador</div><div class="project-name">Projeto End-to-End: SQL → EDA → ML → Deploy</div></div>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ── CONTRIBUIR ── -->
+<!-- CONTRIBUIR -->
 <section id="contribuir">
   <div class="section-header">
     <div class="section-eyebrow">Open source</div>
-    <h2 class="section-title">Construído pela comunidade<br />brasileira de dados</h2>
+    <h2 class="section-title">Construído pela <em>comunidade<br />brasileira de dados</em></h2>
     <p class="section-sub">Qualquer contribuição — de uma correção de typo a um módulo inteiro — é bem-vinda e reconhecida.</p>
   </div>
 
   <div class="contribute-grid">
     <div class="contribute-item">
       <span class="contribute-emoji">🐛</span>
-      <div class="contribute-text">
-        <div class="ct-title">Reportar erros</div>
-        <div class="ct-desc">Informação incorreta, link quebrado, dados desatualizados — abra uma issue.</div>
-      </div>
+      <div><div class="ct-title">Reportar erros</div><div class="ct-desc">Informação incorreta, link quebrado, dados desatualizados — abra uma issue.</div></div>
     </div>
     <div class="contribute-item">
       <span class="contribute-emoji">✍️</span>
-      <div class="contribute-text">
-        <div class="ct-title">Escrever conteúdo</div>
-        <div class="ct-desc">As semanas 3–40 ainda precisam de material manual — cada semana que você escrever ajuda centenas de pessoas.</div>
-      </div>
+      <div><div class="ct-title">Escrever conteúdo</div><div class="ct-desc">As semanas 3–40 precisam de material manual — cada semana ajuda centenas de pessoas.</div></div>
     </div>
     <div class="contribute-item">
       <span class="contribute-emoji">🌐</span>
-      <div class="contribute-text">
-        <div class="ct-title">Indicar recursos em PT-BR</div>
-        <div class="ct-desc">Conhece um canal, livro ou artigo bom em português? Sugira via issue ou PR.</div>
-      </div>
+      <div><div class="ct-title">Indicar recursos em PT-BR</div><div class="ct-desc">Conhece um canal, livro ou artigo bom em português? Sugira via issue ou PR.</div></div>
     </div>
     <div class="contribute-item">
       <span class="contribute-emoji">💡</span>
-      <div class="contribute-text">
-        <div class="ct-title">Propor exercícios</div>
-        <div class="ct-desc">Exercícios com dados brasileiros reais e enunciado claro são sempre bem-vindos.</div>
-      </div>
+      <div><div class="ct-title">Propor exercícios</div><div class="ct-desc">Exercícios com dados brasileiros reais e enunciado claro são sempre bem-vindos.</div></div>
     </div>
     <div class="contribute-item">
       <span class="contribute-emoji">🔧</span>
-      <div class="contribute-text">
-        <div class="ct-title">Melhorar a plataforma</div>
-        <div class="ct-desc">Acessibilidade, responsividade mobile, modo claro — contribuições técnicas ao HTML são aceitas.</div>
-      </div>
+      <div><div class="ct-title">Melhorar a plataforma</div><div class="ct-desc">Acessibilidade, responsividade mobile, modo claro — contribuições técnicas ao HTML são aceitas.</div></div>
     </div>
     <div class="contribute-item">
       <span class="contribute-emoji">🌍</span>
-      <div class="contribute-text">
-        <div class="ct-title">Traduzir recursos</div>
-        <div class="ct-desc">Ótimos artigos em inglês que ainda não estão no curso — traduza e contribua.</div>
-      </div>
+      <div><div class="ct-title">Traduzir recursos</div><div class="ct-desc">Ótimos artigos em inglês que ainda não estão no curso — traduza e contribua.</div></div>
     </div>
   </div>
 
@@ -1139,18 +1142,17 @@
 
 <div class="divider"></div>
 
-<!-- ── CHANGELOG ── -->
+<!-- CHANGELOG -->
 <section id="changelog">
   <div class="section-header">
     <div class="section-eyebrow">Histórico do projeto</div>
-    <h2 class="section-title">Roadmap e Changelog</h2>
+    <h2 class="section-title">Roadmap e <em>Changelog</em></h2>
   </div>
 
   <div class="timeline">
-
     <div class="timeline-item">
-      <div class="timeline-dot" style="background:rgba(61,220,151,0.15); border:1px solid rgba(61,220,151,0.4);">✅</div>
-      <div class="timeline-body">
+      <div class="timeline-dot">✅</div>
+      <div>
         <div class="timeline-version">v1.0.0 · 2025</div>
         <div class="timeline-title">Lançamento inicial</div>
         <ul class="timeline-list">
@@ -1158,61 +1160,55 @@
           <li>Conteúdo manual completo das Semanas 1 e 2 (Módulo 1)</li>
           <li>Geração de conteúdo por IA (Claude) para semanas 3–40</li>
           <li>README, CONTRIBUTING, LICENSE e CHANGELOG</li>
-          <li>Projeto do Módulo 1 com checklist interativo</li>
         </ul>
       </div>
     </div>
-
     <div class="timeline-item">
-      <div class="timeline-dot" style="background:rgba(255,159,67,0.15); border:1px solid rgba(255,159,67,0.4);">🔄</div>
-      <div class="timeline-body">
+      <div class="timeline-dot">🔄</div>
+      <div>
         <div class="timeline-version">v1.1.0 · Em produção</div>
         <div class="timeline-title">Módulo 2 — SQL completo</div>
         <ul class="timeline-list">
-          <li class="planned">Conteúdo manual das Semanas 3–7 (SQL Fundamentos)</li>
+          <li class="planned">Conteúdo manual das Semanas 3–7</li>
           <li class="planned">Templates de issues no GitHub</li>
           <li class="planned">Arquivo CONTRIBUTORS.md</li>
         </ul>
       </div>
     </div>
-
     <div class="timeline-item">
-      <div class="timeline-dot" style="background:rgba(56,217,255,0.10); border:1px solid var(--border2);">📋</div>
-      <div class="timeline-body">
+      <div class="timeline-dot">📋</div>
+      <div>
         <div class="timeline-version">v1.2.0 · Planejado</div>
         <div class="timeline-title">Módulos 3 e 4 — SQL Avançado + Python</div>
         <ul class="timeline-list">
           <li class="planned">Semanas 8–14 com conteúdo manual revisado</li>
-          <li class="planned">Sistema de progresso persistente na plataforma</li>
+          <li class="planned">Sistema de progresso persistente</li>
           <li class="planned">Versão mobile melhorada</li>
         </ul>
       </div>
     </div>
-
     <div class="timeline-item">
-      <div class="timeline-dot" style="background:rgba(124,111,255,0.10); border:1px solid var(--border);">🌟</div>
-      <div class="timeline-body">
+      <div class="timeline-dot">🌟</div>
+      <div>
         <div class="timeline-version">v2.0.0 · Visão futura</div>
         <div class="timeline-title">Formação completa</div>
         <ul class="timeline-list">
           <li class="planned">Todos os 40 módulos com conteúdo manual revisado</li>
           <li class="planned">Trilhas personalizadas por área (fintech, saúde, agro)</li>
           <li class="planned">Notebooks Jupyter para todos os exercícios</li>
-          <li class="planned">Fórum integrado via GitHub Discussions</li>
         </ul>
       </div>
     </div>
-
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ── DOCS ── -->
+<!-- DOCS -->
 <section id="docs">
   <div class="section-header">
     <div class="section-eyebrow">Documentação</div>
-    <h2 class="section-title">Tudo no repositório</h2>
+    <h2 class="section-title">Tudo no <em>repositório</em></h2>
   </div>
 
   <div class="docs-grid">
@@ -1244,25 +1240,17 @@
   </div>
 
   <div class="license-row">
-    <a href="https://creativecommons.org/licenses/by/4.0/" class="license-badge">
-      📝 Conteúdo — CC BY 4.0
-    </a>
-    <a href="LICENSE.md" class="license-badge">
-      💻 Código — MIT License
-    </a>
-    <span class="license-badge" style="cursor:default;">
-      🇧🇷 Idioma — Português BR
-    </span>
-    <span class="license-badge" style="cursor:default;">
-      🟡 Status — Em desenvolvimento
-    </span>
+    <a href="https://creativecommons.org/licenses/by/4.0/" class="license-badge">📝 Conteúdo — CC BY 4.0</a>
+    <a href="LICENSE.md" class="license-badge">💻 Código — MIT License</a>
+    <span class="license-badge" style="cursor:default;">🇧🇷 Idioma — Português BR</span>
+    <span class="license-badge" style="cursor:default;">🟡 Status — Em desenvolvimento</span>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-left">
-    <div class="footer-icon">📊</div>
+  <div class="footer-logo">
+    <div class="footer-logo-icon">📊</div>
     DataPath
   </div>
   <div class="footer-right">
@@ -1273,4 +1261,5 @@
 </footer>
 
 </body>
-</ht
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
